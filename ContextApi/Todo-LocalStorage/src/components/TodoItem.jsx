@@ -10,8 +10,8 @@ function TodoItem({ todo }) {
     updateTodo(todo.id, { ...todo, todo: todoMsg });
     setIsTodoEditable(false);
   };
+
   const toggleCompleted = () => {
-    //console.log(todo.id);
     toggleComplete(todo.id);
   };
 
