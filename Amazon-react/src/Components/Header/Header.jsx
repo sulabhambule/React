@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className="amazon-header">
       <div className="amazon-header-left-section">
-        <Link to="/" className="header-link">
+        <Link to="" className="header-link">
           <img
             className="amazon-logo"
             src={amazonLogo}

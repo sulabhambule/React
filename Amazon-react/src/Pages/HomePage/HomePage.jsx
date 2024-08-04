@@ -6,10 +6,12 @@ const HomePage = () => {
   const [products, setProducts] = useState(data.products);
 
   return (
-    <div className="products-grid">
-      {products.map((product) => (
-        <Cart key={product.id} product={product} />
-      ))}
+    <div>
+      <div className="products-grid">
+        {products.map((product) => (
+          <Cart key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };
