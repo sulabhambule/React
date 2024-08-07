@@ -5,25 +5,25 @@ import ContextProvider from './Features/ContextProvider.jsx';
 import HomePage from './Pages/HomePage/HomePage.jsx';
 import OrdersPage from './Pages/OrdersPage/OrdersPage.jsx';
 import CheckOutPage from './Pages/CheckOutPage/CheckOutPage.jsx';
-import Layout from './Layout.jsx'; // Ensure this file exists and is correctly named
+import Layout from './Layout.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // Layout wraps around the child routes
+    element: <Layout />,
     children: [
       {
         path: "",
-        element: <HomePage /> // Home page at root
+        element: <HomePage />
       },
       {
         path: "orders",
-        element: <OrdersPage /> // Orders page route
+        element: <OrdersPage />
       },
       {
         path: "checkout",
-        element: <CheckOutPage /> // Checkout page route
+        element: <CheckOutPage />
       }
     ]
   }

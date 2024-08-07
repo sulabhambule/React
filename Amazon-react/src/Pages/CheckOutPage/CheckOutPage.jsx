@@ -3,16 +3,16 @@ import amazonLogo from "../../images/amazon-logo-white.png";
 import amazonMobileLogo from "../../images/amazon-mobile-logo-white.png";
 import checkoutLockIcon from "../../images/icons/checkout-lock-icon.png";
 import { Link } from "react-router-dom";
-import "../../App.css"
-import "./checkOutPage.css";
+import "../../App.css";
 import "./checkout.css";
+import "./checkOutPage.css";
 import OrderSummary from "../../Components/OrderSummary/OrderSummary";
 import PaymentSummary from "../../Components/PaymentSummary/PaymentSummary";
 
 import { CartContext } from "../../Features/ContextProvider";
 
 const CheckOutPage = () => {
-  const {cart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
   return (
     <>
       <div className="checkout-header">
@@ -48,7 +48,7 @@ const CheckOutPage = () => {
         <div className="checkout-grid">
           <div className="order-summary js-order-summary">
             {cart.map((cartProduct) => (
-              <OrderSummary cartProduct = {cartProduct} />
+              <OrderSummary cartProduct={cartProduct} />
             ))}
           </div>
 

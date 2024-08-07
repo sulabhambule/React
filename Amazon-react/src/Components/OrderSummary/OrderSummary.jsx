@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { CartContext } from "../../Features/ContextProvider";
 import { getPrice } from "../../utility/Utility.js";
-import { deliveryOptions,getDeliveryOption } from "../../utility/Utility.js";
+import { deliveryOptions, getDeliveryOption } from "../../utility/Utility.js";
 
 import "../../App.css";
 import "../../Pages/CheckOutPage/CheckOutPage.jsx";
@@ -17,7 +17,7 @@ const OrderSummary = ({ cartProduct }) => {
   );
 
   const today = dayjs();
-  const deliveryOptionId = cartProduct.deliveryOptionId
+  const deliveryOptionId = cartProduct.deliveryOptionId;
   const deliveryOption = getDeliveryOption(deliveryOptionId);
   const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
   const dateString = deliveryDate.format("dddd, MMMM D");

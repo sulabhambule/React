@@ -1,5 +1,14 @@
+const getCartFromLocalStorage = () => {
+  const cart = localStorage.getItem("cart");
+  return cart ? JSON.parse(cart) : [];
+};
+
+const saveCartToLocalStorage = (cart) => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
 const CartReducer = (state, action) => {
-  let newState = state;
+  let newState = [...state];
 
   if (action.type === "ADD_TO_CART") {
     const { product, quantity, deliveryOptionId } = action.payload;
@@ -12,13 +21,15 @@ const CartReducer = (state, action) => {
     );
 
     if (existingProductIndex !== -1) {
-      // Product already in the cart, update quantity and delivery option
       newState = state.map((item, index) =>
         index === existingProductIndex
           ? {
               ...item,
               quantity: item.quantity + quantity,
-              deliveryOptionId: deliveryOptionId || defaultDeliveryOptionId,
+              deliveryOptionId:
+                deliveryOptionId ||
+                item.deliveryOptionId ||
+                defaultDeliveryOptionId,
             }
           : item
       );
@@ -32,16 +43,21 @@ const CartReducer = (state, action) => {
         },
       ];
     }
+
+    saveCartToLocalStorage(newState);
   } else if (action.type === "DELETE_FROM_CART") {
     const { productId } = action.payload;
 
     newState = state.filter((item) => item.product.id !== productId);
+    saveCartToLocalStorage(newState);
   } else if (action.type === "UPDATE_DELIVERY_OPTION") {
     const { productId, deliveryOptionId } = action.payload;
 
     newState = state.map((item) =>
       item.product.id === productId ? { ...item, deliveryOptionId } : item
     );
+
+    saveCartToLocalStorage(newState);
   }
 
   return newState;
