@@ -31,7 +31,7 @@ const CheckOutPage = () => {
           <div className="checkout-header-middle-section">
             Checkout (
             <Link className="return-to-home-link" to="/">
-              3 items
+              {cart.length} items
             </Link>
             )
           </div>

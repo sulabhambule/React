@@ -15,6 +15,7 @@ const OrderSummary = ({ cartProduct }) => {
   const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(
     cartProduct.deliveryOptionId || 1
   );
+  const [editMode, setEditMode] = useState(false);
 
   const today = dayjs();
   const deliveryOptionId = cartProduct.deliveryOptionId;
@@ -55,6 +56,19 @@ const OrderSummary = ({ cartProduct }) => {
     });
   };
 
+  const handleUpdateClick = () => {
+    setEditMode(true);
+  };
+
+  const handleQuantityChange = (e) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    dispatch({
+      type: "UPDATE_QUANTITY",
+      payload: { productId: product.id, quantity: newQuantity },
+    });
+    setEditMode(false);
+  };
+
   return (
     <div
       className={`cart-item-container js-cart-item-container js-cart-item-container-${product.id}`}
@@ -67,9 +81,27 @@ const OrderSummary = ({ cartProduct }) => {
           <div className="product-price">{getPrice(product)}</div>
           <div className={`product-quantity js-product-quantity-${product.id}`}>
             <span>
-              Quantity: <span className="quantity-label">{quantity}</span>
+              Quantity:{" "}
+              {editMode ? (
+                <select value={quantity} onChange={handleQuantityChange}>
+                  {[...Array(10).keys()].map((i) => (
+                    <option key={i} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <span className="quantity-label">{quantity}</span>
+              )}
             </span>
-            <span className="update-quantity-link link-primary">Update</span>
+            {!editMode && (
+              <span
+                className="update-quantity-link link-primary"
+                onClick={handleUpdateClick}
+              >
+                Update
+              </span>
+            )}
             <span
               className={`delete-quantity-link link-primary js-delete-link js-delete-link-${product.id}`}
               data-product-id={product.id}

@@ -58,6 +58,14 @@ const CartReducer = (state, action) => {
     );
 
     saveCartToLocalStorage(newState);
+  } else if ("UPDATE_QUANTITY") {
+    const { quantity, productId } = action.payload;
+
+    newState = state.map((item) =>
+      item.product.id === productId ? { ...item, quantity } : item
+    );
+
+    saveCartToLocalStorage(newState);
   }
 
   return newState;

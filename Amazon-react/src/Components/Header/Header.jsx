@@ -9,7 +9,6 @@ import { CartContext } from "../../Features/ContextProvider";
 
 const Header = () => {
   const { cart } = useContext(CartContext);
-  const cartQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="amazon-header">
@@ -40,7 +39,7 @@ const Header = () => {
 
         <Link className="cart-link header-link" to="/checkout">
           <img className="cart-icon" src={cartIcon} alt="Cart" />
-          <div className="cart-quantity js-cart-quantity">{cartQuantity}</div>
+          <div className="cart-quantity js-cart-quantity">{cart.length}</div>
           <div className="cart-text">Cart</div>
         </Link>
       </div>
